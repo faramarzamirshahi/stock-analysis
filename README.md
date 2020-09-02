@@ -8,24 +8,24 @@ The new solution loops through all the data only one time in order to collect th
 Below are the steps:
 
 1- The user enters the year for the dataset
->'''yearValue = InputBox("What year would you like to run the analysis on?")'''
+>```yearValue = InputBox("What year would you like to run the analysis on?")```
 
 2- Right after we start a timer to keep track of the performance
->'''startTime = Timer'''
+>```startTime = Timer```
 
 3- Activate the report sheet "All Stocks Analysis" and create the report headers
->'''
+>```
     Range("A1").Value = "All Stocks (" & yearValue & ")"  
     'Create a header row
     Cells(3, 1).Value = "Ticker"
     Cells(3, 2).Value = "Total Daily Volume"
     Cells(3, 3).Value = "Return"
-'''
+```
 
 4- Create and initialize an array for all tickers
 Our data is ordered by date for each ticker. 
 We initialize the tickers array in the same order as our data tickers.
->'''
+>```
     Dim tickers(12) As String
     tickers(0) = "AY"
     tickers(1) = "CSIQ"
@@ -39,65 +39,65 @@ We initialize the tickers array in the same order as our data tickers.
     tickers(9) = "SPWR"
     tickers(10) = "TERP"
     tickers(11) = "VSLR"
-'''
+```
 
 5- Activate the worksheet for the desired year and get the last row in this sheet
->'''
+>```
     Worksheets(yearValue).Activate
     RowCount = Cells(Rows.Count, "A").End(xlUp).Row
-'''
+```
 
 6- Create arrays to store volumes, starting price and ending price for each ticker
->'''
+>```
     Dim tickerVolumes(12) As Long
     Dim tickerStartingPrices(12), tickerEndingPrices(12) As Single
-'''
+```
 
 7- Reset the tickerVolumes
->'''
+>```
     For i = 0 To 11
         tickerVolumes(i) = 0
     Next i
-'''
+```
 
 8- Initialize tickerIndex before the loop
->'''tickerIndex = 0'''
+>```tickerIndex = 0```
 
 9- LOOP through the dataset set the current ticker and increase its volume
-> '''
+> ```
     For i = 2 To RowCount
         ticker = tickers(tickerIndex)
         tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
-        '''
+        ```
 Check if the current row is the first row of the current ticker to set the startingPrice
-'''
+```
         If Cells(i, 1).Value = ticker And Cells(i - 1, 1).Value <> ticker Then
             'set starting price
             tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
         End If
-'''
+```
 Check if the current row is the last row of the current ticker to set the endingPrice and increase the tickerIndex
-'''
+```
            If Cells(i, 1).Value = ticker And Cells(i + 1, 1).Value <> ticker Then
                 'set ending price
                 tickerEndingPrices(tickerIndex) = Cells(i, 6).Value
                 ' If the next row?s ticker doesn?t match, increase the tickerIndex
                 tickerIndex = tickerIndex + 1
             End If
-''' 
+``` 
 
 10- Loop through the ticker arrays to print the report
->'''
+>```
     For i = 0 To 11
         Worksheets("All Stocks Analysis").Activate
         Cells(4 + i, 1).Value = tickers(i)
         Cells(4 + i, 2).Value = tickerVolumes(i)
         Cells(4 + i, 3).Value = tickerEndingPrices(i) / tickerStartingPrices(i) - 1
     Next i
-'''
+```
 
 11- Format the report
->'''
+>```
     Range("A3:C3").Font.FontStyle = "Bold"
     Range("A3:C3").Borders(xlEdgeBottom).LineStyle = xlContinuous
     Range("B4:B15").NumberFormat = "#,##0"
@@ -112,13 +112,13 @@ Check if the current row is the last row of the current ticker to set the ending
             Cells(i, 3).Interior.Color = vbRed
         End If
     Next i
-'''
+```
 
 12- Capture the end time and print the processing time
->'''
+>```
     endTime = Timer
     MsgBox "This code ran in " & (endTime - startTime) & " seconds for the year " & (yearValue)
-'''
+```
 
 
 ## Summary
