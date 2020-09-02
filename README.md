@@ -123,12 +123,9 @@ MsgBox "This code ran in " & (endTime - startTime) & " seconds for the year " & 
 
 ## Summary
 The refactoring allowed the code clean-up and also improve the performance drastically as shown in the figures below
-
-###Performance improvement
-2017**
 ![processing time for 2017 before refactoring](Resources/2017_OldCode.png)
 ![processing time for 2017 after refactoring](Resources/VBA_Challenge_2017.png)
-**2018**
+
 ![processing time for 2018 before refactoring](Resources/2018_OldCode.png)
 ![processing time for 2017 after refactoring](Resources/VBA_Challenge_2018.png)
 
