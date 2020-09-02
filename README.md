@@ -129,4 +129,4 @@ The refactoring allowed the code clean-up and also improve the performance drast
 ![processing time for 2018 before refactoring](Resources/2018_OldCode.png)
 ![processing time for 2017 after refactoring](Resources/VBA_Challenge_2018.png)
 
-At the same time the refactoring added some further level of complexity with respect to the original code because of the need of nested loops and arrays to store intermediate results
+At the same time the refactoring added some further level of complexity with respect to the original code because nested loops and new arrays
